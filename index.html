@@ -1,0 +1,155 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>CHANGE THIS</title>
+		
+		<style type="text/css">
+			body, html {
+				padding: 0;
+				margin: 0;
+			}
+
+			body {
+				overflow: hidden;
+			}
+
+			html {
+			  box-sizing: border-box;
+			}
+			*, *:before, *:after {
+			  box-sizing: inherit;
+			}
+
+			div.slides {
+				height: 100vh;
+				display: flex;
+				flex-direction: row;
+			}
+			section {
+				display: inline-block;
+				height: 100vh;
+				width: 100vw;
+				flex-shrink: 0;
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+			}
+
+			section img {
+				max-width: 100%;
+			}
+
+			section h1, 
+			section h2, 
+			section p {
+				text-align: center;
+			}
+
+			body {
+  background: #fffff8;
+  background-color: #fffff8; }
+
+.slides {
+  font-family: "IBM Plex Sans Medium";
+  font-size: 42px;
+  font-weight: normal;
+  color: #111;
+  transition: transform 0.7s cubic-bezier(.17,.9,.36,1.0);
+}
+
+::selection {
+  color: #fff;
+  background: #bee4fd;
+  text-shadow: none; }
+
+::-moz-selection {
+  color: #fff;
+  background: #bee4fd;
+  text-shadow: none; }
+
+.slides > section,
+.slides > section > section {
+  line-height: 1.3;
+  font-weight: inherit; }
+
+.slides h1,
+.slides h2,
+.slides h3,
+.slides h4,
+.slides h5,
+.slides h6 {
+  margin: 0 0 20px 0;
+  color: #111;
+  font-family: "IBM Plex Sans Semibold";
+  font-weight: normal;
+  line-height: 1.2;
+  letter-spacing: 1.2rem;
+  text-transform: uppercase;
+  text-shadow: none;
+  padding: 0 16.5%;
+  word-wrap: break-word; }
+		</style>
+	</head>
+	<body>
+			<div class="slides">
+				<section>
+					<h1>💻</h1>
+					<h1>What about you, Fabian?</h1>
+					<h1>💻</h1>
+				</section>
+				<section>
+					<img src="img/my_face.png">
+				</section>
+				<section>
+						<h2>Grab a paper & pen</h2>
+						<h2>write some poetry</h2>
+						<h2>give me the poetry</h2>
+				</section>
+				<section>
+					<h1>Rosie is going to join us later</h1>
+				</section>
+			</div>
+
+		<script>
+			const inc = (a) => { return a + 1 };
+			const dec = (a) => { return a - 1 };
+
+			const getOp = (bool) => {
+				if(bool) return inc;
+				return dec;
+			}
+
+			const get_in_range = (min, max) => {
+				return (_state) => {
+					if(_state > max) return max;
+					if(_state < min) return min;
+					return _state;
+				} 
+			}
+
+
+			window.addEventListener('DOMContentLoaded', () => {
+			    const parent = document.querySelector(".slides");
+			    const slides = document.querySelectorAll("section");
+			    let state = 0;
+			    const in_range = get_in_range(document.querySelectorAll("section").length * -1 + 1, 0);
+
+			    document.addEventListener('keyup', (event) => {
+			    	console.log(event.key);
+			    	const key = event.key;
+
+			    	if(key == "ArrowLeft" || key == "ArrowRight") {
+			    		event.preventDefault();
+			    		let op = getOp(key == "ArrowLeft");
+			    		state = in_range(op(state));
+
+			    		parent.style.transform = `translateX(${state}00vw)`;
+			    	}
+			    });
+			});
+		</script>
+	</body>
+</html>
